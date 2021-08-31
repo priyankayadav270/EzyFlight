@@ -3,6 +3,7 @@
     <div class="ui_container mb">
       <div class="tp">
         <label>Welcome To EzyFlight ... Book your ticket here</label>
+        <label>Data pulled form API is printed in console</label>
       </div>
       <table class="table">
         <tr class="flex mb">
@@ -92,8 +93,8 @@ export default {
         }
       )
       .then((res) => {
-        self.airports = res.data;
         console.log(res.data);
+        self.airports = res.data;
       })
       .catch((error) => {
         console.error(error);
@@ -132,11 +133,10 @@ export default {
   width: 20%;
   padding-left: 20px;
 }
-.tp{
+.tp {
   margin-top: 1rem;
   margin-bottom: 1rem;
   font-weight: bold;
   font-size: 18px;
 }
-
 </style>
