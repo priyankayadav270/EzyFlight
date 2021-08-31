@@ -2,11 +2,10 @@
   <div>
     <dropdown
       class="custom-select"
-      :options="arrayOfObjects"
-      :selected="object"
-      v-on:updateOption="methodToRunOnSelect"
-      :placeholder="'Select an Item'"
-      :closeOnOutsideClick="boolean"
+      :options="{ optionList }"
+      :selected="{ selectedOption }"
+      :placeholder="'Select airport'"
+      :closeOnOutsideClick="true"
     />
   </div>
 </template>
@@ -15,6 +14,10 @@ import dropdown from "vue-dropdowns";
 export default {
   name: "EzyDropDown",
   components: { dropdown },
+  props: {
+    optionList: Array,
+    selectedOption: {},
+  },
 };
 </script>
 
@@ -23,11 +26,17 @@ export default {
 .custom-select {
   position: relative;
   font-family: Arial;
-  border-top: 1px solid !important;
+  border: 1px solid !important;
+  border-radius: 5px !important;
 }
 
 .custom-select select {
-  display: none; 
+  display: none;
+}
+
+
+.custom-select li {
+  background-image: none !important;
 }
 
 .select-selected {
@@ -50,7 +59,8 @@ export default {
   top: 7px;
 }
 
-.select-items div,.select-selected {
+.select-items div,
+.select-selected {
   color: #ffffff;
   padding: 8px 16px;
   border: 1px solid transparent;
@@ -71,19 +81,23 @@ export default {
   display: none;
 }
 
-.select-items div:hover, .same-as-selected {
+.select-items div:hover,
+.same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
 .btn-group {
   margin: 0 !important;
+  height: 37px !important;
 }
 
-.dropdown-toggle{
-  min-width:0px !important;
+.btn-group li {
+  min-width: 145px !important;
+  background-image: none !important;
+  background: none !important;
 }
 
-.caret{
-    top: 0px !important;
+.caret {
+  top: 0px !important;
 }
 </style>
