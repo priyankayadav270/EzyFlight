@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Datepicker></Datepicker>
+    <Datepicker class="h40"></Datepicker>
   </div>
 </template>
 <script>
@@ -10,3 +10,8 @@ export default {
   components: { Datepicker },
 };
 </script>
+<style scoped>
+.h40 input[type="text"] {
+  height: 40px;
+}
+</style>

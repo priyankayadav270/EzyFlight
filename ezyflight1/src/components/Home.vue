@@ -1,37 +1,31 @@
 <template>
   <div class="bgimage">
     <div class="ui_container mb">
-      <div class="mb">
-        <EzyLabel title="Welcome To EzyFlight ... Book your ticket here" />
+      <div class="tp">
+        <label>Welcome To EzyFlight ... Book your ticket here</label>
       </div>
       <table class="table">
         <tr class="flex mb">
           <td class="col">
             <div class="flex mb">
               <EzyLabel title="Origin" />
-              <EzyDropDown />
+              <EzyDropDown :optionList="airports" />
             </div>
           </td>
           <td class="col">
             <div class="flex mb">
               <EzyLabel title="Destination " />
-              <EzyDropDown />
+              <EzyDropDown :optionList="airports" />
             </div>
           </td>
-          <td class="col">
+          <td class="col2">
             <div class="flex mb">
-              <EzyLabel title="Round Trip ?" /><EzySwitch />
+              <EzyLabel idStr="roundtrip" title="Round Trip ?" /><EzySwitch />
             </div>
           </td>
-          <td><EzyButton title="Search" /></td>
+          <td class="col2"><EzyButton title="Search" /></td>
         </tr>
         <tr class="flex mb">
-          <td class="col">
-            <div class="flex mb">
-              <EzyLabel title="Number of adults" /><EzyCounter />
-              <EzyLabel title="Number of kids ?" /><EzyCounter />
-            </div>
-          </td>
           <td class="col">
             <div class="flex mb">
               <EzyLabel title="Departure Date" /><EzyDate
@@ -44,6 +38,16 @@
               <EzyLabel title="Return Date" /><EzyDate
                 placeholder="Rerurn Date"
               />
+            </div>
+          </td>
+          <td class="col">
+            <div class="flex mb">
+              <EzyLabel title="Number of adults" /><EzyCounter />
+            </div>
+          </td>
+          <td>
+            <div class="flex mb">
+              <EzyLabel title="Number of kids ?" /><EzyCounter />
             </div>
           </td>
         </tr>
@@ -70,17 +74,25 @@ export default {
     EzySwitch,
     EzyLabel,
   },
-  setup() {
+  data: function () {
+    return {
+      airports: [],
+    };
+  },
+  mounted() {
+    const self = this;
     axios
       .get(
         "https://api-uat-ezycommerce.ezyflight.se/api/v1/Airport/OriginsWithConnections/en-us",
         {
           headers: {
-            Authorization: `token ${"Tenant-Identifier:9d7d6eeb25cd6083e0df323a0fff258e59398a702fac09131275b6b1911e202d"}`,
+            "Tenant-Identifier":
+              "9d7d6eeb25cd6083e0df323a0fff258e59398a702fac09131275b6b1911e202d",
           },
         }
       )
       .then((res) => {
+        self.airports = res.data;
         console.log(res.data);
       })
       .catch((error) => {
@@ -93,7 +105,7 @@ export default {
 
 <style scoped>
 .bgimage {
-  background-color:turquoise;
+  background-color: #13b3a314;
 }
 .table {
   table-layout: fixed;
@@ -113,7 +125,18 @@ export default {
   margin-bottom: 1rem;
 }
 .col {
-  width: 400px;
-  padding-left: 50px;
+  width: 25%;
+  padding-left: 40px;
 }
+.col2 {
+  width: 20%;
+  padding-left: 20px;
+}
+.tp{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 </style>
